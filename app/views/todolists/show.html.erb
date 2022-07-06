@@ -1,8 +1,22 @@
 <h2>タイトル</h2>
 <p><%= @list.title %></p>
 <h2>本文</h2>
-<p><%= @list.body %></p>
-<p class="sentiment-score">本文の感情分析スコア[<%= @list.score %>]</p>
+<p><%= simple_format(@list.body) %></p>
+
+<div>
+  <p>感情分析の結果</p>
+  <% if @list.score >= 0 %>
+    <label class="sentiment-score" style='color: blue '><strong>very good</strong></label>
+    <p>点数：<%= @list.score %>点</p>
+  <% elsif @list.score == 0 %>
+    <label class="sentiment-score" style='color: yellow '><strong>good</strong></label>
+    <p>点数：<%= @list.score %>点</p>
+  <% else %>
+    <label class="sentiment-score" style='color: red '><strong>bad</strong></label>
+    <p>点数：<%= @list.score %>点</p>
+  <% end %>
+</div>
+
 <h2>画像</h2>
 <% if @list.image.attached? %>
   <%= image_tag @list.image.variant(resize:'300x300') %>

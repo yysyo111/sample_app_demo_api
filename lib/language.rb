@@ -23,7 +23,7 @@ module Language
       response = https.request(request, params)
       # APIレスポンス出力
       response_body = JSON.parse(response.body)
-      byebug
+      # byebug
       if (error = response_body['error']).present?
         raise error['message']
       else
